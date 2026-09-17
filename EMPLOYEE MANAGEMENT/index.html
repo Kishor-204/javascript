@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Employee Management Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <div class="container">
+
+
+
+        <header class="header">
+
+            <div class="header-content">
+
+                <div>
+
+                    
+
+                    <h1>
+                        Employee Management Dashboard
+                    </h1>
+
+                
+
+                </div>
+
+
+                <div class="date-time">
+
+                    <p id="today">
+                        Today: Loading...
+                    </p>
+
+                    <p id="time">
+                        Time: Loading...
+                    </p>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        
+
+        <section class="controls">
+
+
+            <div class="section-title">
+
+                <h2>
+                    Employee Directory
+                </h2>
+
+                <p>
+                    Search and filter employees
+                </p>
+
+            </div>
+
+
+
+            <!-- Search -->
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="🔍 Search employee by name..."
+                >
+
+                <button
+                    id="searchBtn"
+                    class="search-btn"
+                >
+                    Search
+                </button>
+
+            </div>
+
+
+
+            <!-- Department Filters -->
+
+            <div class="filter-area">
+
+                <p class="filter-label">
+                    Filter by Department
+                </p>
+
+
+                <div class="department-buttons">
+
+                    <button
+                        class="department-btn active"
+                        data-department="All"
+                    >
+                        All
+                    </button>
+
+                    <button
+                        class="department-btn"
+                        data-department="IT"
+                    >
+                        IT
+                    </button>
+
+                    <button
+                        class="department-btn"
+                        data-department="HR"
+                    >
+                        HR
+                    </button>
+
+                    <button
+                        class="department-btn"
+                        data-department="Finance"
+                    >
+                        Finance
+                    </button>
+
+                    <button
+                        class="department-btn"
+                        data-department="Marketing"
+                    >
+                        Marketing
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Sorting -->
+
+            <div class="sorting">
+
+                <label>
+                    Sort Employees
+                </label>
+
+
+                <div
+                    class="custom-dropdown"
+                    id="sortDropdown"
+                >
+
+
+                    <button
+                        type="button"
+                        class="dropdown-selected"
+                        id="sortSelected"
+                    >
+
+                        Select Sorting
+
+                        <span class="arrow">
+                            ▼
+                        </span>
+
+                    </button>
+
+
+                    <div
+                        class="dropdown-options"
+                        id="sortOptions"
+                    >
+
+                        <div
+                            class="dropdown-option"
+                            data-value="none"
+                        >
+                            Select Sorting
+                        </div>
+
+                        <div
+                            class="dropdown-option"
+                            data-value="nameAsc"
+                        >
+                            Name A-Z
+                        </div>
+
+                        <div
+                            class="dropdown-option"
+                            data-value="nameDesc"
+                        >
+                            Name Z-A
+                        </div>
+
+                        <div
+                            class="dropdown-option"
+                            data-value="ageAsc"
+                        >
+                            Age LOW-HIGH
+                        </div>
+
+                        <div
+                            class="dropdown-option"
+                            data-value="ageDesc"
+                        >
+                            Age HIGH-LOW
+                        </div>
+
+                        <div
+                            class="dropdown-option"
+                            data-value="salaryAsc"
+                        >
+                            Salary LOW-HIGH
+                        </div>
+
+                        <div
+                            class="dropdown-option"
+                            data-value="salaryDesc"
+                        >
+                            Salary HIGH-LOW
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             MESSAGE
+        ====================================== -->
+
+        <div id="message"></div>
+
+
+
+        <!-- =====================================
+             EMPLOYEE COUNT
+        ====================================== -->
+
+        <section class="count-section">
+
+            <div>
+
+                <p class="dashboard-label">
+                    CURRENT EMPLOYEES
+                </p>
+
+                <h2>
+                    Employee Count
+                </h2>
+
+            </div>
+
+
+            <div class="count-number">
+
+                <span id="employeeCount">
+                    0
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             EMPLOYEE CARDS
+        ====================================== -->
+
+        <section>
+
+            <div
+                id="employeeContainer"
+                class="employee-container"
+            >
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             SALARY DASHBOARD
+        ====================================== -->
+
+        <section class="salary-dashboard">
+
+            <div class="section-title">
+
+                <h2>
+                    Salary Dashboard
+                </h2>
+
+                <p>
+                    Employee salary statistics
+                </p>
+
+            </div>
+
+
+            <div class="salary-cards">
+
+
+                <div class="salary-card total-card">
+
+                    
+
+                    <h3>
+                        Total Employees
+                    </h3>
+
+                    <p id="salaryEmployeeCount">
+                        0
+                    </p>
+
+                </div>
+
+
+
+                <div class="salary-card salary-total-card">
+
+                    
+
+                    <h3>
+                        Total Salary
+                    </h3>
+
+                    <p id="totalSalary">
+                        ₹0
+                    </p>
+
+                </div>
+
+
+
+                <div class="salary-card average-card">
+
+                    
+
+                    <h3>
+                        Average Salary
+                    </h3>
+
+                    <p id="averageSalary">
+                        ₹0
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             HIGHEST SALARY
+        ====================================== -->
+
+        <section class="highest-salary">
+
+            <div class="highest-icon">
+                🏆
+            </div>
+
+
+            <div>
+
+                <p class="dashboard-label">
+                    TOP SALARY
+                </p>
+
+                <h2>
+                    Highest Paid Employee
+                </h2>
+
+                <div id="highestEmployee">
+
+                    No employee data.
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             ADD EMPLOYEE
+        ====================================== -->
+
+        <section class="add-section">
+
+            <div class="section-title">
+
+                <h2>
+                    Add New Employee
+                </h2>
+
+                <p>
+                    Enter employee details below
+                </p>
+
+            </div>
+
+
+            <form id="employeeForm">
+
+
+                <!-- Name -->
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Employee Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter employee name"
+                    >
+
+                    <small id="nameError"></small>
+
+                </div>
+
+
+
+                <!-- Age -->
+
+                <div class="form-group">
+
+                    <label for="age">
+                        Age
+                    </label>
+
+                    <input
+                        type="number"
+                        id="age"
+                        placeholder="Enter employee age"
+                    >
+
+                    <small id="ageError"></small>
+
+                </div>
+
+
+
+                <!-- Email -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter employee email"
+                    >
+
+                    <small id="emailError"></small>
+
+                </div>
+
+
+
+                <!-- Department -->
+
+                <div class="form-group">
+
+                    <label>
+                        Department
+                    </label>
+
+
+                    <div
+                        class="custom-dropdown full-width"
+                        id="departmentDropdown"
+                    >
+
+
+                        <button
+                            type="button"
+                            class="dropdown-selected"
+                            id="departmentSelected"
+                        >
+
+                            Select Department
+
+                            <span class="arrow">
+                                ▼
+                            </span>
+
+                        </button>
+
+
+                        <div
+                            class="dropdown-options"
+                            id="departmentOptions"
+                        >
+
+                            <div
+                                class="dropdown-option"
+                                data-value=""
+                            >
+                                Select Department
+                            </div>
+
+                            <div
+                                class="dropdown-option"
+                                data-value="IT"
+                            >
+                                IT
+                            </div>
+
+                            <div
+                                class="dropdown-option"
+                                data-value="HR"
+                            >
+                                HR
+                            </div>
+
+                            <div
+                                class="dropdown-option"
+                                data-value="Finance"
+                            >
+                                Finance
+                            </div>
+
+                            <div
+                                class="dropdown-option"
+                                data-value="Marketing"
+                            >
+                                Marketing
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <small id="departmentError"></small>
+
+                </div>
+
+
+
+                <!-- Salary -->
+
+                <div class="form-group">
+
+                    <label for="salary">
+                        Salary
+                    </label>
+
+                    <input
+                        type="number"
+                        id="salary"
+                        placeholder="Enter employee salary"
+                    >
+
+                    <small id="salaryError"></small>
+
+                </div>
+
+
+
+                <!-- Hidden department -->
+
+                <input
+                    type="hidden"
+                    id="department"
+                    value=""
+                >
+
+
+
+                <!-- Submit -->
+
+                <button
+                    type="submit"
+                    class="add-btn"
+                >
+                    + Add Employee
+                </button>
+
+
+            </form>
+
+        </section>
+
+
+    </div>
+
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
